@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3분기 60억 매출 달성 영업 프로모션</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --accent-color: #0284c7;
+            --accent-gradient: linear-gradient(135deg, #0284c7, #0369a1);
+            --gold-color: #b45309;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --success-color: #16a34a;
+            --table-header-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            background: rgba(2, 132, 199, 0.08);
+            color: var(--accent-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(2, 132, 199, 0.15);
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* 프로모션 종합 테이블 */
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--table-header-bg);
+            padding: 18px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 20px;
+            font-size: 14px;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        .prog-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--accent-color);
+            margin-bottom: 4px;
+            white-space: nowrap;
+        }
+
+        .prog-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .target-badge {
+            display: inline-block;
+            background: rgba(180, 83, 9, 0.08);
+            color: var(--gold-color);
+            border: 1px solid rgba(180, 83, 9, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .reward-list {
+            list-style: none;
+        }
+
+        .reward-list li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+            white-space: nowrap;
+        }
+
+        .reward-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-text {
+            color: #e11d48;
+            font-weight: 600;
+        }
+
+        .success-text {
+            color: var(--success-color);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .nowrap-text {
+            white-space: nowrap;
+        }
+
+        /* 실시간 인센티브 계산기 섹션 */
+        .calculator-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .calc-header {
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .calc-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .calc-header p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .reward-list li {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border-bottom: 1px solid var(--border-color);
+                padding: 10px 0;
+            }
+            td {
+                border: none;
+                padding: 10px 20px;
+                position: relative;
+            }
+            td:before {
+                content: attr(data-label);
+                display: block;
+                font-weight: bold;
+                color: var(--accent-color);
+                font-size: 12px;
+                margin-bottom: 4px;
+            }
+            .reward-list li {
+                white-space: normal;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+        }
+
+        .unit {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .result-box {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .result-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .result-value {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .result-total {
+            font-size: 20px;
+            color: var(--gold-color);
+            font-weight: 800;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Q3 SALES PROMOTION</span>
+        <h1>3분기 60억 달성 레이스</h1>
+        <p>영업본부 공동 목표 달성을 위한 현금 보상 프로모션 안내</p>
+    </header>
+
+    <!-- 프로모션 테이블 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 22%;">프로그램 구분</th>
+                    <th style="width: 18%;">운영 기간 및 대상</th>
+                    <th style="width: 45%;">보상 및 리워드 조건 (현금 중심)</th>
+                    <th style="width: 15%;">지급 시점</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="프로그램 구분">
+                        <div class="prog-title">① 7월 얼리버드 레이스</div>
+                        <div class="prog-sub">초기 기세 선점 및 슬럼프 방지</div>
+                    </td>
+                    <td data-label="운영 기간 및 대상">
+                        <div class="nowrap-text" style="margin-bottom: 6px;"><strong>7월 한 달간</strong></div>
+                        <span class="target-badge">개인전</span>
+                    </td>
+                    <td data-label="보상 및 리워드 조건">
+                        <strong class="nowrap-text">7월 목표 110% 선착순 조기 달성자 (Top 3)</strong>
+                        <ul class="reward-list" style="margin-top: 8px;">
+                            <li>🥇 1등 : <span class="highlight-text">현금 1,000,000원</span></li>
+                            <li>🥈 2등 : <span class="highlight-text">현금 500,000원</span></li>
+                            <li>🥉 3등 : <span class="highlight-text">현금 300,000원</span></li>
+                        </ul>
+                    </td>
+                    <td data-label="지급 시점">
+                        <span class="success-text">8월 급여일 포함 지급</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="프로그램 구분">
+                        <div class="prog-title">② 스케일업 인센티브</div>
+                        <div class="prog-sub">3분기 누적 한계 돌파 레이스</div>
+                    </td>
+                    <td data-label="운영 기간 및 대상">
+                        <div class="nowrap-text" style="margin-bottom: 6px;"><strong>3분기 전체 (7~9월)</strong></div>
+                        <span class="target-badge">개인전</span>
+                    </td>
+                    <td data-label="보상 및 리워드 조건">
+                        <strong class="nowrap-text">3분기 개인 목표 달성률 기준 누적 차등 보상</strong>
+                        <ul class="reward-list" style="margin-top: 8px;">
+                            <li>달성률 90% ~ 100% 미만 : 기본 인센티브 100% 지급</li>
+                            <li>달성률 100% ~ 110% 미만 : 기본 인센티브 + <span class="highlight-text">축하금 500,000원</span></li>
+                            <li>달성률 110% ~ 120% 미만 : 초과 매출분 <span class="highlight-text">인센티브 1.5배</span> 적용</li>
+                            <li>달성률 120% 이상 : 초과 매출분 <span class="highlight-text">인센티브 2배</span> 적용</li>
+                        </ul>
+                    </td>
+                    <td data-label="지급 시점">
+                        <span class="success-text">10월 급여일 합산 지급</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="프로그램 구분">
+                        <div class="prog-title">③ 주간/월간 현금 시상</div>
+                        <div class="prog-sub">지속적인 활력 유지 및 중위권 붐업</div>
+                    </td>
+                    <td data-label="운영 기간 및 대상">
+                        <div class="nowrap-text" style="margin-bottom: 6px;"><strong>매주 / 매월 상시</strong></div>
+                        <span class="target-badge">개인전</span>
+                    </td>
+                    <td data-label="보상 및 리워드 조건">
+                        <strong>과정 중심 격려 및 단기 성과 보상</strong>
+                        <ul class="reward-list" style="margin-top: 8px;">
+                            <li style="white-space: normal;">
+                                <strong>주간 Key Man (매주 1~2명) : 최고 매출/신규 계약 등 건당</strong><br>
+                                <span class="highlight-text" style="margin-top: 4px; display: inline-block;">현금 50,000 ~ 100,000원 즉시 지급</span>
+                            </li>
+                            <li style="white-space: normal; margin-top: 10px;">
+                                🥇 <strong>월간 MVP (7, 8월 각 1명) : 당월 최고 매출 또는<br>최고 성장률 달성자 현금 300,000원</strong>
+                            </li>
+                        </ul>
+                    </td>
+                    <td data-label="지급 시점">
+                        <span class="success-text">주간: 익주 월요일 즉시</span><br>
+                        <span class="success-text">월간: 익월 급여일 포함</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 인센티브 시뮬레이터 -->
+    <div class="calculator-section">
+        <div class="calc-header">
+            <h2>내 3분기 추가 보너스 계산기</h2>
+            <p>목표치와 예상 매출액을 입력하여 스케일업 추가 현금 리워드를 미리 확인하세요. (기본 인센티브 제외 추가금 기준)</p>
+        </div>
+        <div class="calc-grid">
+            <div class="calc-inputs">
+                <div class="form-group">
+                    <label for="base-target-display">나의 3분기 기본 매출 목표</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="base-target-display" value="30,000" oninput="handleInput(this, 'base-target')">
+                        <span class="unit">만원</span>
+                        <input type="hidden" id="base-target" value="30000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="expected-sales-display">나의 3분기 예상 매출액</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="expected-sales-display" value="35,000" oninput="handleInput(this, 'expected-sales')">
+                        <span class="unit">만원</span>
+                        <input type="hidden" id="expected-sales" value="35000">
+                    </div>
+                </div>
+            </div>
+            <div class="result-box">
+                <div class="result-row">
+                    <span class="result-label">예상 달성률</span>
+                    <span class="result-value" id="calc-rate" style="color: var(--accent-color);">116.7%</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">구간 보너스 (100% 달성 축하금)</span>
+                    <span class="result-value" id="calc-base-bonus">500,000 원</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">스케일업 추가 우대 요율</span>
+                    <span class="result-value" id="calc-premium-rate">초과분 1.5배 적용 구간</span>
+                </div>
+                <div class="result-row" style="margin-top: 10px; padding-top: 15px; border-top: 2px solid var(--border-color);">
+                    <span class="result-label" style="font-weight: 700; color: var(--text-main);">총 예상 추가 현금 포상</span>
+                    <span class="result-total" id="calc-total-bonus">500,000 원 + [초과분 1.5배 인센]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function unformatNumber(str) {
+        return str.replace(/[^0-9]/g, "");
+    }
+
+    function handleInput(inputElement, hiddenId) {
+        let rawValue = unformatNumber(inputElement.value);
+        
+        if (rawValue.length > 1 && rawValue.startsWith('0')) {
+            rawValue = parseInt(rawValue, 10).toString();
+        }
+        
+        document.getElementById(hiddenId).value = rawValue || "0";
+        
+        if (rawValue) {
+            inputElement.value = formatNumber(rawValue);
+        } else {
+            inputElement.value = "";
+        }
+        
+        calculateIncentive();
+    }
+
+    function calculateIncentive() {
+        const target = parseFloat(document.getElementById('base-target').value) || 0;
+        const sales = parseFloat(document.getElementById('expected-sales').value) || 0;
+        
+        if (target <= 0) {
+            document.getElementById('calc-rate').innerText = '0%';
+            document.getElementById('calc-base-bonus').innerText = '0 원';
+            document.getElementById('calc-premium-rate').innerText = '-';
+            document.getElementById('calc-total-bonus').innerText = '0 원';
+            return;
+        }
+
+        const rate = (sales / target) * 100;
+        document.getElementById('calc-rate').innerText = rate.toFixed(1) + '%';
+
+        let baseBonus = "0 원";
+        let premiumRate = "기본 인센티브 구간 (추가 없음)";
+        let totalText = "기본 인센티브만 지급";
+
+        if (rate >= 90 && rate < 100) {
+            baseBonus = "0 원";
+            premiumRate = "기본 요율 100% 적용";
+            totalText = "기본 인센티브 지급";
+        } else if (rate >= 100 && rate < 110) {
+            baseBonus = formatNumber(500000) + " 원";
+            premiumRate = "기본 요율 + 축하금";
+            totalText = formatNumber(500000) + " 원";
+        } else if (rate >= 110 && rate < 120) {
+            baseBonus = formatNumber(500000) + " 원";
+            premiumRate = "초과 매출분 1.5배 우대";
+            totalText = formatNumber(500000) + " 원 + [초과분 1.5배 인센]";
+        } else if (rate >= 120) {
+            baseBonus = formatNumber(500000) + " 원";
+            premiumRate = "초과 매출분 2.0배 파격 우대";
+            totalText = formatNumber(500000) + " 원 + [초과분 2.0배 인센]";
+        }
+
+        document.getElementById('calc-base-bonus').innerText = baseBonus;
+        document.getElementById('calc-premium-rate').innerText = premiumRate;
+        document.getElementById('calc-total-bonus').innerText = totalText;
+    }
+    
+    window.onload = function() {
+        calculateIncentive();
+    };
+</script>
+
+</body>
+</html>
